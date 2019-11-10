@@ -6,17 +6,24 @@ using UnityEngine.Events;
 public class BuildingView : MonoBehaviour
 {
     public bool IsCollision { get; private set; }
-    public UnityEvent OnCollision = new UnityEvent();
-    public UnityEvent OnRelease = new UnityEvent();
-    public UnityEvent OnBuild = new UnityEvent();
-    public bool IsBuilt;
+
+    private bool isBuilt;
+    public bool IsBuilt
+    {
+        get => isBuilt;
+        set 
+        {
+            if (value)
+                transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 0, 0));
+            isBuilt = value;
+        }
+    }
 
     private void OnCollisionStay(Collision collision)
     {
-        if (!IsBuilt)
+        if (!IsCollision && !IsBuilt)
         {
-            if (!IsCollision)
-                OnCollision.Invoke();
+            transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.1f, 0, 0));
             IsCollision = true;
         }
     }
@@ -25,7 +32,7 @@ public class BuildingView : MonoBehaviour
     {
         if (!IsBuilt)
         {
-            OnRelease.Invoke();
+            transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 0.1f, 0));
             IsCollision = false;
         }
     }
