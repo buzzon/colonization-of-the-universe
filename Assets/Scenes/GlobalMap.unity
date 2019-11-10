@@ -287,13 +287,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 607162289}
-  m_LocalRotation: {x: 0.5150381, y: 0, z: 0, w: 0.85716736}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.5299192, y: 0, z: 0, w: 0.8480481}
+  m_LocalPosition: {x: 150, y: 74, z: 60}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 62, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 64, y: 0, z: 0}
 --- !u!1 &1376180771
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,10 +338,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _world: {fileID: 1669134976}
-  _sector: {fileID: 6179324324456844508, guid: 4d9a164224ca9354795d65abbc4bc08d, type: 3}
-  _sectorsInLine: 32
-  _distanceBetweenSectors: 0.2
-  _moveSpeed: 25
+  _sector: {fileID: 4863684130120804377, guid: 4d9a164224ca9354795d65abbc4bc08d, type: 3}
+  _sectorsInLine: 10
+  _offset: 0
+  _moveSpeed: 80
 --- !u!1 &1669134975
 GameObject:
   m_ObjectHideFlags: 0
