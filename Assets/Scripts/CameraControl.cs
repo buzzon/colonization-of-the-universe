@@ -22,5 +22,13 @@ public class CameraControl : MonoBehaviour
         };
         offset = new Vector3(0, 0, 0);
     }
-    public void Update() => transform.position += offset.normalized * Time.deltaTime * MoveSpeed;
+    public void Update()
+    {
+        float scale = -Input.GetAxis("Mouse ScrollWheel");
+        offset.y = scale;
+        Vector3 rotation = transform.rotation.eulerAngles;
+        rotation.x += scale * 3;
+        transform.rotation = Quaternion.Euler(rotation);
+        transform.position += offset.normalized * Time.deltaTime * MoveSpeed;
+    }
 }
