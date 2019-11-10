@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildingButtons : MonoBehaviour
+public class ButtonManager : MonoBehaviour
 {
     public GameObject BuildingButtonPrefab;
     public Transform BuildingsParent;
+
     void Start()
     {
         BuildingProfile[] buildings = Resources.LoadAll<BuildingProfile>("Buildings");

@@ -7,12 +7,14 @@ public class PlaceManager : MonoBehaviour
     public GameObject Terrain;
     private BuildingView buildingView;
     private GameObject building;
+
     public void Set(GameObject _building)
     {
         building = _building;
         buildingView = building.GetComponent<BuildingView>();
         StartCoroutine(BuildingPositionUpdate());
     }
+
     IEnumerator BuildingPositionUpdate()
     {
         while (!buildingView.IsBuilt)

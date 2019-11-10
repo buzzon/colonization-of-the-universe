@@ -6,6 +6,7 @@ public class BuildingButton : MonoBehaviour
 {
     public BuildingProfile BuildingProfile { get; set; }
     public Transform BuildingsParent { get; set; }
+
     public void OnClick()
     {
         GameObject building = Instantiate(BuildingProfile.Prefab, BuildingsParent);
