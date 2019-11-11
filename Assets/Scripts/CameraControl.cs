@@ -24,11 +24,16 @@ public class CameraControl : MonoBehaviour
     }
     public void Update()
     {
-        float scale = -Input.GetAxis("Mouse ScrollWheel");
-        offset.y = scale;
-        Vector3 rotation = transform.rotation.eulerAngles;
-        rotation.x += scale * 3;
-        transform.rotation = Quaternion.Euler(rotation);
+        float scale = -Input.GetAxis("Mouse ScrollWheel") * 5;
+        if ((transform.position.y >= 30 || scale > 0) &&
+            (transform.position.y <= 90 || scale < 0))
+        {
+            Vector3 rotation = transform.rotation.eulerAngles;
+            rotation.x += scale;
+            transform.rotation = Quaternion.Euler(rotation);
+            transform.position += new Vector3(0, scale * 2, 0);
+            MoveSpeed += scale;
+        }
         transform.position += offset.normalized * Time.deltaTime * MoveSpeed;
     }
 }
