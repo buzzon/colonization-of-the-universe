@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlaceManager : MonoBehaviour
 {
-    public GameObject Terrain;
+    public GameObject TerrainForBuildings;
     private BuildingView buildingView;
     private GameObject building;
 
@@ -25,7 +25,7 @@ public class PlaceManager : MonoBehaviour
 
             foreach (RaycastHit hit in hits)
             {
-                if (hit.collider != null && hit.collider.gameObject == Terrain)
+                if (hit.collider != null && hit.collider.gameObject == TerrainForBuildings)
                 {
                     Vector3 offset = new Vector3(0, building.GetComponent<Renderer>().bounds.size.y / 2, 0);
                     building.transform.position = hit.point + offset;
