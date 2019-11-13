@@ -25,11 +25,11 @@ public class MoveSectors : MonoBehaviour
         SetBoundMap(fullSectorSize);
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (!IsInputReceived(out float horizontal, out float vertical)) return;
 
-        transform.position -= new Vector3(horizontal, 0, vertical).normalized * Time.deltaTime * _moveSpeed;
+        transform.position -= new Vector3(horizontal, 0, vertical) * Time.deltaTime * _moveSpeed;
 
         foreach (GameObject sector in _sectors)
         {
