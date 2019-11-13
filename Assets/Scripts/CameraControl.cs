@@ -22,11 +22,13 @@ public class CameraControl : MonoBehaviour
         };
         offset = new Vector3(0, 0, 0);
     }
+
     public void Update()
     {
         float scale = -Input.GetAxis("Mouse ScrollWheel") * 5;
-        if ((transform.position.y >= 30 || scale > 0) &&
-            (transform.position.y <= 90 || scale < 0))
+        float yPosition = transform.position.y + scale * 2;
+        if ((yPosition >= 30 || scale > 0) &&
+            (yPosition <= 90 || scale < 0))
         {
             Vector3 rotation = transform.rotation.eulerAngles;
             rotation.x += scale;
