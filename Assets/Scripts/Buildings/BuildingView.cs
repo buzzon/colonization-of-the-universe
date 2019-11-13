@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class BuildingView : MonoBehaviour
 {
@@ -21,7 +20,7 @@ public class BuildingView : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (!IsCollision && !IsBuilt)
+        if (!IsBuilt && !IsCollision)
         {
             transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.1f, 0, 0));
             IsCollision = true;
