@@ -338,9 +338,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _world: {fileID: 1669134976}
-  _sector: {fileID: 4863684130120804377, guid: 4d9a164224ca9354795d65abbc4bc08d, type: 3}
+  _mesh: {fileID: 4863684130120804377, guid: 4d9a164224ca9354795d65abbc4bc08d, type: 3}
   _sectorsInLine: 10
-  _offset: 0
+  _offset: 0.5
   _moveSpeed: 80
 --- !u!1 &1669134975
 GameObject:
@@ -370,7 +370,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 3, z: 200}
+  m_Size: {x: 10, y: 3, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &1669134977
 Transform:
