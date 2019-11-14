@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine.SceneManagement;
 
 public static class Loader
 {
@@ -13,6 +10,6 @@ public static class Loader
 
     public static void Load(Scene scene)
     {
-        SceneManager.LoadScene(scene.ToString());
+        SceneManager.LoadScene(scene.ToString(), LoadSceneMode.Additive);
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,9 +49,10 @@ public class SelectSector : MonoBehaviour
         SetColor(sector, Color.white);
     }
 
-    private static void OpenSector(GameObject sector)
+    private void OpenSector(GameObject sector)
     {
         SetColor(sector, Color.green);
+        transform.gameObject.SetActive(false);
         Loader.Load(Loader.Scene.Sector);
     }
 }
