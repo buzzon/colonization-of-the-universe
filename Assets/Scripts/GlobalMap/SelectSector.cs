@@ -46,11 +46,11 @@ public class SelectSector : MonoBehaviour
 
     private static void ReleaseSector(GameObject sector)
     {
-        sector.GetComponent<Renderer>().material.SetColor("_Color", Color.white);
+        SetColor(sector, Color.white);
     }
 
     private static void OpenSector(GameObject sector)
     {
-        SetColor(sector,Color.green);
+        SetColor(sector, Color.green);
     }
 }
