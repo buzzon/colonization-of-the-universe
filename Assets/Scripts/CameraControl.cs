@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraControl : MonoBehaviour
 {
     public GameObject TerrainOverWhichMove;
-    public float MoveSpeed;
     private Dictionary<string, Vector3> dir;
     private Vector3 offset;
     private float height;
@@ -38,9 +37,8 @@ public class CameraControl : MonoBehaviour
             transform.rotation = Quaternion.Euler(rotation);
             transform.position += new Vector3(0, scale * 2, 0);
             height = newHeight;
-            MoveSpeed += scale;
         }
-        transform.position += offset.normalized * Time.deltaTime * MoveSpeed;
+        transform.position += offset.normalized * Time.deltaTime * height;
         transform.position += new Vector3(0, height - GetHeight(), 0);
     }
 
