@@ -29,8 +29,9 @@ public class CameraControl : MonoBehaviour
     {
         float scale = -Input.GetAxis("Mouse ScrollWheel") * 6;
         float newHeight = height + scale * 2;
-        if ((newHeight >= 30 || scale > 0) &&
-            (newHeight <= 90 || scale < 0) && scale != 0)
+        if (scale != 0 && 
+            (newHeight >= 30 || scale > 0) &&
+            (newHeight <= 90 || scale < 0))
         {
             Vector3 rotation = transform.rotation.eulerAngles;
             rotation.x += scale;
@@ -38,8 +39,11 @@ public class CameraControl : MonoBehaviour
             transform.position += new Vector3(0, scale * 2, 0);
             height = newHeight;
         }
-        transform.position += offset.normalized * Time.deltaTime * height;
-        transform.position += new Vector3(0, height - GetHeight(), 0);
+        if (offset.magnitude > 0)
+        {
+            transform.position += offset.normalized * Time.deltaTime * height;
+            transform.position += new Vector3(0, height - GetHeight(), 0);
+        }
     }
 
     private float GetHeight()
