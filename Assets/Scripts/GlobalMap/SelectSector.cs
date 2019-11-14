@@ -52,5 +52,6 @@ public class SelectSector : MonoBehaviour
     private static void OpenSector(GameObject sector)
     {
         SetColor(sector, Color.green);
+        Loader.Load(Loader.Scene.Sector);
     }
 }

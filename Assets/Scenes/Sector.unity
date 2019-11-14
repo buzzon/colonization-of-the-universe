@@ -1018,7 +1018,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TerrainOverWhichMove: {fileID: 205775232}
-  MoveSpeed: 60
 --- !u!1 &585357212
 GameObject:
   m_ObjectHideFlags: 0
@@ -1692,7 +1691,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 276666408}
   m_HandleRect: {fileID: 276666407}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
