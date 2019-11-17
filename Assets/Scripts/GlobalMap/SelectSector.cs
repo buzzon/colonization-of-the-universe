@@ -53,6 +53,7 @@ public class SelectSector : MonoBehaviour
     {
         SetColor(sector, Color.green);
         transform.gameObject.SetActive(false);
+        CurrentSector.Manager = sector.GetComponent<SectorManager>();
         Loader.Load(Loader.Scene.Sector);
     }
 }

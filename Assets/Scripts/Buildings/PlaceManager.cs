@@ -5,13 +5,13 @@ using UnityEngine;
 public class PlaceManager : MonoBehaviour
 {
     public GameObject TerrainForBuildings;
-    private BuildingView buildingView;
+    private BuildingManager buildingView;
     private GameObject building;
 
     public void Set(GameObject _building)
     {
         building = _building;
-        buildingView = building.GetComponent<BuildingView>();
+        buildingView = building.GetComponent<BuildingManager>();
         StartCoroutine(BuildingPositionUpdate());
     }
 

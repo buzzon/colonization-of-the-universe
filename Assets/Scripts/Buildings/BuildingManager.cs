@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingView : MonoBehaviour
+public class BuildingManager : MonoBehaviour
 {
     public bool IsCollision { get; private set; }
 
@@ -13,7 +13,11 @@ public class BuildingView : MonoBehaviour
         set 
         {
             if (value)
+            {
                 transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 0, 0));
+                IBuilding building = transform.GetComponent<IBuilding>();
+                building.Set();
+            }
             isBuilt = value;
         }
     }
