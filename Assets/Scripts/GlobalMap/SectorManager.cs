@@ -14,7 +14,7 @@ public class SectorManager : MonoBehaviour
 
     private void UpdateResources(IBuilding building)
     {
-        Debug.Log(sectorResources[(int)ResourceType.Energy].Count.ToString()); //Debug
+        Debug.Log("Energy: " + sectorResources[(int)ResourceType.Energy].Count.ToString() + " Coal: " + sectorResources[(int)ResourceType.Coal].Count.ToString()); //Debug
         bool isWork = TryGetResources(building.ResourcesUses);
         if (isWork)
             AddResources(building.ResourcesProduces);
@@ -68,7 +68,7 @@ public class SectorManager : MonoBehaviour
         sectorResources = new List<Resource>();
         for (ResourceType type = 0; type < ResourceType.lenght; type++)
             sectorResources.Add(new Resource(type.ToString()));
-        sectorResources[(int)ResourceType.Energy].Count = 10; //Debug
+        sectorResources[(int)ResourceType.Coal].Count = 10; //Debug
         StartCoroutine(SectorUpdate());
     }
 

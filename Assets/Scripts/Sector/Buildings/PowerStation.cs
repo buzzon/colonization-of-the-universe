@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Mine : MonoBehaviour, IBuilding
+public class PowerStation : MonoBehaviour, IBuilding
 {
     public Dictionary<ResourceType, int> ResourcesUses { get; private set; }
     public Dictionary<ResourceType, int> ResourcesProduces { get; private set; }
@@ -11,11 +10,11 @@ public class Mine : MonoBehaviour, IBuilding
     {
         ResourcesUses = new Dictionary<ResourceType, int>()
         {
-            { ResourceType.Energy, 1 }
+            { ResourceType.Coal, 2 }
         };
         ResourcesProduces = new Dictionary<ResourceType, int>()
         {
-            { ResourceType.Coal, 2 }
+            { ResourceType.Energy, 2 }
         };
         CurrentSector.Manager.AddBuilding(this);
     }
