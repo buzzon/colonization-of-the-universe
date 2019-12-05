@@ -27,8 +27,7 @@ public class PlaceManager : MonoBehaviour
             {
                 if (hit.collider != null && hit.collider.gameObject == TerrainForBuildings)
                 {
-                    Vector3 offset = new Vector3(0, building.GetComponent<Renderer>().bounds.size.y / 2, 0);
-                    building.transform.position = hit.point + offset;
+                    building.transform.position = hit.point;
                     break;
                 }
             }
