@@ -13,7 +13,7 @@ public class BuildingManager : MonoBehaviour
             if (value)
                 transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 0, 0));
             else
-                transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.1f, 0.1f, 0));
+                transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.2f, 0.2f, 0));
             isWork = value;
         }
     }
@@ -39,7 +39,7 @@ public class BuildingManager : MonoBehaviour
     {
         if (!IsBuilt && !IsCollision)
         {
-            transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.1f, 0, 0));
+            transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.2f, 0, 0));
             IsCollision = true;
         }
     }
@@ -48,7 +48,7 @@ public class BuildingManager : MonoBehaviour
     {
         if (!IsBuilt)
         {
-            transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 0.1f, 0));
+            transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 0.2f, 0));
             IsCollision = false;
         }
     }

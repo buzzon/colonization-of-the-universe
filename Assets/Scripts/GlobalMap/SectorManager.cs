@@ -15,8 +15,24 @@ public class SectorManager : MonoBehaviour
     private void UpdateResources(IBuilding building)
     {
         Debug.Log(sectorResources[(int)ResourceType.Energy].Count.ToString()); //Debug
-        if (TryGetResources(building.ResourcesUses))
+        bool isWork = TryGetResources(building.ResourcesUses);
+        if (isWork)
             AddResources(building.ResourcesProduces);
+
+        if (CurrentSector.Manager == this)
+        {
+            MonoBehaviour buildingEntity = building as MonoBehaviour;
+            if (buildingEntity != null)
+            {
+                if (buildingEntity.TryGetComponent(out BuildingManager buildingManager))
+                {
+                    if (isWork && !buildingManager.IsWork)
+                        buildingManager.IsWork = true;
+                    else if (!isWork && buildingManager.IsWork)
+                        buildingManager.IsWork = false;
+                }
+            }
+        }
     }
 
     private bool TryGetResources(Dictionary<ResourceType, int> resources)
