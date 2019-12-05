@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Mine : MonoBehaviour, IBuilding
 {
-    public Dictionary<ResourceType, float> ResourcesUses { get; private set; }
-    public Dictionary<ResourceType, float> ResourcesProduces { get; private set; }
+    public Dictionary<ResourceType, int> ResourcesUses { get; private set; }
+    public Dictionary<ResourceType, int> ResourcesProduces { get; private set; }
 
     public void Set()
     {
-        ResourcesUses = new Dictionary<ResourceType, float>()
+        ResourcesUses = new Dictionary<ResourceType, int>()
         {
             { ResourceType.Energy, 1 }
         };
-        ResourcesProduces = new Dictionary<ResourceType, float>()
+        ResourcesProduces = new Dictionary<ResourceType, int>()
         {
             { ResourceType.Coal, 2 }
         };
