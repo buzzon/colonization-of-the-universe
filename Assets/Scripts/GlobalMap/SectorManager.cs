@@ -12,36 +12,36 @@ public class SectorManager : MonoBehaviour
         buildings.Add(building);
     }
 
-    public void UpdateResources(IBuilding building, float deltaTime)
+    private void UpdateResources(IBuilding building)
     {
         Debug.Log(sectorResources[(int)ResourceType.Energy].Count.ToString()); //Debug
-        if (TryGetResources(building.ResourcesUses, deltaTime))
-            AddResources(building.ResourcesProduces, deltaTime);
+        if (TryGetResources(building.ResourcesUses))
+            AddResources(building.ResourcesProduces);
     }
 
-    public bool TryGetResources(Dictionary<ResourceType, float> resources, float deltaTime)
+    private bool TryGetResources(Dictionary<ResourceType, int> resources)
     {
-        bool isEnought = true;
+        bool isEnough = true;
         foreach (var resource in resources)
         {
-            if (sectorResources[(int)resource.Key].Count < resource.Value * deltaTime)
+            if (sectorResources[(int)resource.Key].Count < resource.Value)
             {
-                isEnought = false;
+                isEnough = false;
                 break;
             }
         }
-        if (isEnought)
+        if (isEnough)
         {
             foreach (var resource in resources)
-                sectorResources[(int)resource.Key].Count -= resource.Value * deltaTime;
+                sectorResources[(int)resource.Key].Count -= resource.Value;
         }
-        return isEnought;
+        return isEnough;
     }
 
-    public void AddResources(Dictionary<ResourceType, float> resources, float deltaTime)
+    private void AddResources(Dictionary<ResourceType, int> resources)
     {
         foreach (var resource in resources)
-            sectorResources[(int)resource.Key].Count += resource.Value * deltaTime;
+            sectorResources[(int)resource.Key].Count += resource.Value;
     }
 
     public Resource[] GetResources() => sectorResources.ToArray();
@@ -53,11 +53,16 @@ public class SectorManager : MonoBehaviour
         for (ResourceType type = 0; type < ResourceType.lenght; type++)
             sectorResources.Add(new Resource(type.ToString()));
         sectorResources[(int)ResourceType.Energy].Count = 10; //Debug
+        StartCoroutine(SectorUpdate());
     }
 
-    private void FixedUpdate()
+    private IEnumerator SectorUpdate()
     {
-        for (int i = 0; i < buildings.Count; i++)
-            UpdateResources(buildings[i], Time.fixedDeltaTime);
+        while (true)
+        {
+            for (int i = 0; i < buildings.Count; i++)
+                UpdateResources(buildings[i]);
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 }
