@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
+    private bool isWork;
+    public bool IsWork 
+    {
+        get => isWork;
+        set
+        {
+            if (value)
+                transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 0, 0));
+            else
+                transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0.1f, 0.1f, 0));
+            isWork = value;
+        }
+    }
     public bool IsCollision { get; private set; }
 
     private bool isBuilt;
@@ -14,9 +27,9 @@ public class BuildingManager : MonoBehaviour
         {
             if (value)
             {
-                transform.GetComponent<Renderer>().material.SetColor("_EmissionColor", new Color(0, 0, 0));
                 IBuilding building = transform.GetComponent<IBuilding>();
                 building.Set();
+                IsWork = true;
             }
             isBuilt = value;
         }

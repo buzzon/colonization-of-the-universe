@@ -6,13 +6,11 @@ public class Resource
 {
     public string Name;
     public float Count;
-    public float Factor;
 
     public Resource(string name)
     {
         Name = name;
         Count = 0;
-        Factor = 0;
     }
 }
 

@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class Mine : MonoBehaviour, IBuilding
 {
+    public Dictionary<ResourceType, float> ResourcesUses { get; private set; }
+    public Dictionary<ResourceType, float> ResourcesProduces { get; private set; }
+
     public void Set()
     {
-        CurrentSector.Manager.AddResourceFactor(ResourceType.Energy, -2);
-        CurrentSector.Manager.AddResourceFactor(ResourceType.Coal, 2);
+        ResourcesUses = new Dictionary<ResourceType, float>()
+        {
+            { ResourceType.Energy, 1 }
+        };
+        ResourcesProduces = new Dictionary<ResourceType, float>()
+        {
+            { ResourceType.Coal, 2 }
+        };
+        CurrentSector.Manager.AddBuilding(this);
     }
 }

@@ -5,19 +5,19 @@ using UnityEngine;
 public class PlaceManager : MonoBehaviour
 {
     public GameObject TerrainForBuildings;
-    private BuildingManager buildingView;
+    private BuildingManager buildingManager;
     private GameObject building;
 
     public void Set(GameObject _building)
     {
         building = _building;
-        buildingView = building.GetComponent<BuildingManager>();
+        buildingManager = building.GetComponent<BuildingManager>();
         StartCoroutine(BuildingPositionUpdate());
     }
 
     IEnumerator BuildingPositionUpdate()
     {
-        while (!buildingView.IsBuilt)
+        while (!buildingManager.IsBuilt)
         {
             RaycastHit[] hits;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -32,8 +32,8 @@ public class PlaceManager : MonoBehaviour
                     break;
                 }
             }
-            if (Input.GetMouseButtonDown(0) && !buildingView.IsCollision)
-                buildingView.IsBuilt = true;
+            if (Input.GetMouseButtonDown(0) && !buildingManager.IsCollision)
+                buildingManager.IsBuilt = true;
             yield return null;
         }
     }
