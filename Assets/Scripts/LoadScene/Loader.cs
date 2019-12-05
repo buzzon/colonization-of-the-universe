@@ -12,4 +12,12 @@ public static class Loader
     {
         SceneManager.LoadScene(scene.ToString(), LoadSceneMode.Additive);
     }
+
+    [System.Obsolete]
+    public static void UnLoad(Scene scene)
+    {
+        if (SceneManager.sceneCount <= 1) return;
+        SceneManager.UnloadScene(scene.ToString());
+    }
+
 }

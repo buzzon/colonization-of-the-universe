@@ -4,34 +4,40 @@ using UnityEngine;
 
 public class SelectSector : MonoBehaviour
 {
+    [SerializeField] private Camera globalCamera;
     private GameObject _selectedSector;
     public float ClickDelta = 0.35f;
     private float _clickTime;
 
     void Update()
     {
-        if (!Input.GetMouseButtonDown(0)) return;
-
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        var hits = Physics.RaycastAll(ray);
-
-        foreach (RaycastHit hit in hits)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (hit.collider.tag == "Sector")
-            {
-                if (IsDoubleClick(hit.transform.gameObject)) 
-                    OpenSector(_selectedSector);
-                else
-                {
-                    if (_selectedSector != null) ReleaseSector(_selectedSector);
+            CloseSector();
+        }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            var hits = Physics.RaycastAll(ray);
 
-                    _selectedSector = hit.transform.gameObject;
-                    SetColor(_selectedSector, Color.red);
+            foreach (RaycastHit hit in hits)
+            {
+                if (hit.collider.tag == "Sector")
+                {
+                    if (IsDoubleClick(hit.transform.gameObject))
+                        OpenSector(_selectedSector);
+                    else
+                    {
+                        if (_selectedSector != null) ReleaseSector(_selectedSector);
+
+                        _selectedSector = hit.transform.gameObject;
+                        SetColor(_selectedSector, Color.red);
+                    }
                 }
             }
-        }
 
-        _clickTime = Time.time;
+            _clickTime = Time.time;
+        }
     }
 
     private bool IsDoubleClick(GameObject sector)
@@ -51,9 +57,17 @@ public class SelectSector : MonoBehaviour
 
     private void OpenSector(GameObject sector)
     {
-        SetColor(sector, Color.green);
-        transform.gameObject.SetActive(false);
+        SetColor(sector, Color.white);
+        globalCamera.gameObject.SetActive(false);
         CurrentSector.Manager = sector.GetComponent<SectorManager>();
         Loader.Load(Loader.Scene.Sector);
+    }
+
+    private void CloseSector()
+    {
+        CurrentSector.Manager = null;
+        Loader.UnLoad(Loader.Scene.Sector);
+        globalCamera.gameObject.SetActive(true);
+
     }
 }
