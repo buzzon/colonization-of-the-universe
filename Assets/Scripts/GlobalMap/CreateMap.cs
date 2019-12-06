@@ -4,43 +4,38 @@ using UnityEngine;
 
 public class CreateMap : MonoBehaviour
 {
-    [SerializeField] private GameObject _mesh;
-    [SerializeField] private int _sectorsInLine;
-    [SerializeField] private float _offset;
-    private BoxCollider _world;
-
-    void Awake()
-    {
-        _world = transform.gameObject.GetComponent<BoxCollider>();
-    }
+    public GameObject SectorPrefab;
+    public int SectorsInLine;
+    public float Offset;
 
     void Start()
     {
-        Vector3 sectorSize = _mesh.GetComponent<Renderer>().bounds.size;
-        Vector3 fullSectorSize = new Vector3(sectorSize.x + _offset, sectorSize.y + _offset, sectorSize.z + _offset);
+        BoxCollider collider = transform.gameObject.GetComponent<BoxCollider>();
+        Vector3 sectorSize = SectorPrefab.GetComponent<Renderer>().bounds.size;
+        Vector3 fullSectorSize = new Vector3(sectorSize.x + Offset, sectorSize.y + Offset, sectorSize.z + Offset);
 
         Create(fullSectorSize);
-        SetBound(fullSectorSize);
+        SetBound(collider, fullSectorSize);
     }
 
-    private void Create(Vector3 sectorOffset)
+    private void Create(Vector3 sectorSize)
     {
         int k = 0;
-        for (int j = 0; j < _sectorsInLine; j++)
+        for (int j = 0; j < SectorsInLine; j++)
         {
-            for (int i = 0; i < _sectorsInLine; i++)
+            for (int i = 0; i < SectorsInLine; i++)
             {
-                Vector3 position = new Vector3(i * sectorOffset.x + (sectorOffset.x / 2) * (j % 2), 0, j * sectorOffset.z * 3 / 4);
-                GameObject sector = Instantiate(_mesh, position, Quaternion.identity, transform);
+                Vector3 position = new Vector3(i * sectorSize.x + (sectorSize.x / 2) * (j % 2), 0, j * sectorSize.z * 3 / 4);
+                GameObject sector = Instantiate(SectorPrefab, position, Quaternion.identity, transform);
                 sector.GetComponent<SectorManager>().ID = k;
                 k++;
             }
         }
     }
 
-    private void SetBound(Vector3 sectorOffset)
+    private void SetBound(BoxCollider collider, Vector3 sectorSize)
     {
-        _world.size = new Vector3(sectorOffset.x * _sectorsInLine, 3, sectorOffset.z * 3 / 4 * _sectorsInLine);
-        _world.center = new Vector3(_world.size.x / 2, 0, _world.size.z / 2);
+        collider.size = new Vector3(sectorSize.x * SectorsInLine, 3, sectorSize.z * 3 / 4 * SectorsInLine);
+        collider.center = new Vector3(collider.size.x / 2, 0, collider.size.z / 2);
     }
 }

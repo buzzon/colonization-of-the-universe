@@ -1,73 +1,84 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SelectSector : MonoBehaviour
 {
-    [SerializeField] private Camera globalCamera;
-    private GameObject _selectedSector;
-    public float ClickDelta = 0.35f;
-    private float _clickTime;
+    public Camera MainCamera;
+    public float ClickDelta;
+    private GameObject selectedSector;
+    private float clickTime;
+    private bool isSectorOpen;
 
-    void Update()
+    private void Start()
+    {
+        isSectorOpen = false;
+        StartCoroutine(SelectSectorUpdate());
+    }
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
             CloseSector();
-        }
-        else if (Input.GetMouseButtonDown(0))
+    }
+
+    IEnumerator SelectSectorUpdate()
+    {
+        while (!isSectorOpen)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            var hits = Physics.RaycastAll(ray);
-
-            foreach (RaycastHit hit in hits)
+            if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider.tag == "Sector")
-                {
-                    if (IsDoubleClick(hit.transform.gameObject))
-                        OpenSector(_selectedSector);
-                    else
-                    {
-                        if (_selectedSector != null) ReleaseSector(_selectedSector);
+                Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
+                var hits = Physics.RaycastAll(ray);
 
-                        _selectedSector = hit.transform.gameObject;
-                        SetColor(_selectedSector, Color.red);
+                foreach (RaycastHit hit in hits)
+                {
+                    if (hit.collider.tag == "Sector")
+                    {
+                        if (IsDoubleClick(hit.transform.gameObject))
+                            OpenSector(selectedSector);
+                        else
+                        {
+                            if (selectedSector != null)
+                                SetColor(selectedSector, Color.white);
+
+                            selectedSector = hit.transform.gameObject;
+                            SetColor(selectedSector, Color.yellow);
+                        }
                     }
                 }
+                clickTime = Time.time;
             }
-
-            _clickTime = Time.time;
+            yield return null;
         }
     }
 
     private bool IsDoubleClick(GameObject sector)
     {
-        return Time.time <= _clickTime + ClickDelta && _selectedSector == sector;
+        return Time.time <= clickTime + ClickDelta && selectedSector == sector;
     }
 
-    private static void SetColor(GameObject gameObject, Color color)
+    private void SetColor(GameObject gameObject, Color color)
     {
         gameObject.GetComponent<Renderer>().material.SetColor("_Color", color);
-    }
-
-    private static void ReleaseSector(GameObject sector)
-    {
-        SetColor(sector, Color.white);
     }
 
     private void OpenSector(GameObject sector)
     {
         SetColor(sector, Color.white);
-        globalCamera.gameObject.SetActive(false);
+        MainCamera.gameObject.SetActive(false);
         CurrentSector.Manager = sector.GetComponent<SectorManager>();
         Loader.Load(Loader.Scene.Sector);
+        isSectorOpen = true;
     }
 
     private void CloseSector()
     {
         CurrentSector.Manager = null;
         Loader.UnLoad(Loader.Scene.Sector);
-        globalCamera.gameObject.SetActive(true);
-
+        MainCamera.gameObject.SetActive(true);
+        isSectorOpen = false;
+        StartCoroutine(SelectSectorUpdate());
     }
 }

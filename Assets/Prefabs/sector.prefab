@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5798680662763498845}
   - component: {fileID: -5181081365037028476}
   m_Layer: 0
-  m_Name: sector
+  m_Name: Sector
   m_TagString: Sector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb4fb48752d8e984b9b7fef2908242be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 0
 --- !u!64 &-5181081365037028476
 MeshCollider:
   m_ObjectHideFlags: 0

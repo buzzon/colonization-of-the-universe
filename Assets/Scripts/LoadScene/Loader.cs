@@ -10,7 +10,6 @@ public static class Loader
 
     public static void Load(Scene scene)
     {
-        if (SceneManager.sceneCount >= 2) return;
         SceneManager.LoadScene(scene.ToString(), LoadSceneMode.Additive);
     }
 
