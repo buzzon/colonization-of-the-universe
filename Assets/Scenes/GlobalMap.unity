@@ -1203,9 +1203,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f141ceaf8317aa45936a84f14937094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mesh: {fileID: 4863684130120804377, guid: 4d9a164224ca9354795d65abbc4bc08d, type: 3}
-  _sectorsInLine: 8
-  _offset: 0.5
+  SectorPrefab: {fileID: 4863684130120804377, guid: 4d9a164224ca9354795d65abbc4bc08d,
+    type: 3}
+  SectorsInLine: 8
+  Offset: 0.3
 --- !u!65 &1361669265
 BoxCollider:
   m_ObjectHideFlags: 0
