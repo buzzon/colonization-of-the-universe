@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraControl : MonoBehaviour
+public class MapControl : MonoBehaviour
 {
-    public GameObject TerrainOverWhichMove;
     private Dictionary<string, Vector3> dir;
     private Vector3 offset;
-    private float height;
 
     public void PointerEnter(string direction) => offset += dir[direction];
     public void PointerExit(string direction) => offset -= dir[direction];
@@ -22,41 +20,24 @@ public class CameraControl : MonoBehaviour
             { "Left", new Vector3(-1f, 0f, 0f) }
         };
         offset = new Vector3(0, 0, 0);
-        height = GetHeight();
     }
 
     private void Update()
     {
         float scale = -Input.GetAxis("Mouse ScrollWheel") * 8;
-        float newHeight = height + scale * 2;
+        float newHeight = transform.position.y + scale * 2;
         if (scale != 0 && 
-            (newHeight >= 20 || scale > 0) &&
+            (newHeight >= 60 || scale > 0) &&
             (newHeight <= 120 || scale < 0))
         {
             Vector3 rotation = transform.rotation.eulerAngles;
             rotation.x += scale;
             transform.rotation = Quaternion.Euler(rotation);
             transform.position += new Vector3(0, scale * 2, 0);
-            height = newHeight;
         }
         if (offset.magnitude > 0)
         {
-            transform.position += offset.normalized * Time.deltaTime * height * 2;
-            transform.position += new Vector3(0, height - GetHeight(), 0);
+            //Тут перемещаем сектора в зависимости от offset
         }
-    }
-
-    private float GetHeight()
-    {
-        RaycastHit[] hits;
-        Ray ray = new Ray(transform.position, Vector3.down);
-        hits = Physics.RaycastAll(ray);
-
-        foreach (RaycastHit hit in hits)
-        {
-            if (hit.collider != null && hit.collider.gameObject == TerrainOverWhichMove)
-                return transform.position.y - hit.point.y;
-        }
-        return 0f;
     }
 }

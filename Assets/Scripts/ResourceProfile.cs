@@ -6,5 +6,5 @@ using UnityEngine;
 public class ResourceProfile : ScriptableObject
 {
     public Sprite Icon;
-    public string Name;
+    public ResourceType Type;
 }

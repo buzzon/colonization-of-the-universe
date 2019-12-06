@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class Resource
 {
-    public string Name;
+    public ResourceType Type;
     public float Count;
 
-    public Resource(string name)
+    public Resource(ResourceType type)
     {
-        Name = name;
+        Type = type;
         Count = 0;
     }
 }
 
 public enum ResourceType
 {
-    Energy, Coal, lenght
+    Energy, Coal, length
 }

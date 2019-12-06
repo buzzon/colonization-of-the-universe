@@ -15,7 +15,7 @@ public class PlaceManager : MonoBehaviour
         StartCoroutine(BuildingPositionUpdate());
     }
 
-    IEnumerator BuildingPositionUpdate()
+    private IEnumerator BuildingPositionUpdate()
     {
         while (!buildingManager.IsBuilt)
         {
@@ -33,6 +33,11 @@ public class PlaceManager : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0) && !buildingManager.IsCollision)
                 buildingManager.IsBuilt = true;
+            if (Input.GetMouseButtonDown(1))
+            {
+                Destroy(building);
+                break;
+            }
             yield return null;
         }
     }

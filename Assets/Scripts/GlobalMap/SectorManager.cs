@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SectorManager : MonoBehaviour
 {
+    public int ID;
     private List<IBuilding> buildings;
     private List<Resource> sectorResources;
 
@@ -14,7 +15,6 @@ public class SectorManager : MonoBehaviour
 
     private void UpdateResources(IBuilding building)
     {
-        Debug.Log("Energy: " + sectorResources[(int)ResourceType.Energy].Count.ToString() + " Coal: " + sectorResources[(int)ResourceType.Coal].Count.ToString()); //Debug
         bool isWork = TryGetResources(building.ResourcesUses);
         if (isWork)
             AddResources(building.ResourcesProduces);
@@ -60,14 +60,14 @@ public class SectorManager : MonoBehaviour
             sectorResources[(int)resource.Key].Count += resource.Value;
     }
 
-    public Resource[] GetResources() => sectorResources.ToArray();
+    public Resource GetResource(ResourceType resourceType) => sectorResources[(int)resourceType];
 
     private void Start()
     {
         buildings = new List<IBuilding>();
         sectorResources = new List<Resource>();
-        for (ResourceType type = 0; type < ResourceType.lenght; type++)
-            sectorResources.Add(new Resource(type.ToString()));
+        for (ResourceType type = 0; type < ResourceType.length; type++)
+            sectorResources.Add(new Resource(type));
         sectorResources[(int)ResourceType.Coal].Count = 10; //Debug
         StartCoroutine(SectorUpdate());
     }
