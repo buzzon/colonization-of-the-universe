@@ -8,10 +8,34 @@ public class SectorManager : MonoBehaviour
     private List<IBuilding> buildings;
     private List<Resource> sectorResources;
 
+    private void Start()
+    {
+        buildings = new List<IBuilding>();
+        sectorResources = new List<Resource>();
+        for (ResourceType type = 0; type < ResourceType.length; type++)
+            sectorResources.Add(new Resource(type));
+        sectorResources[(int)ResourceType.Coal].Count = 10; //Debug
+        sectorResources[(int)ResourceType.Wood].Count = 40; //Debug
+        sectorResources[(int)ResourceType.Iron].Count = 40; //Debug
+        StartCoroutine(SectorUpdate());
+    }
+
+    private IEnumerator SectorUpdate()
+    {
+        while (true)
+        {
+            for (int i = 0; i < buildings.Count; i++)
+                UpdateResources(buildings[i]);
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
+
     public void AddBuilding(IBuilding building)
     {
         buildings.Add(building);
     }
+
+    public Resource GetResource(ResourceType resourceType) => sectorResources[(int)resourceType];
 
     private void UpdateResources(IBuilding building)
     {
@@ -35,7 +59,7 @@ public class SectorManager : MonoBehaviour
         }
     }
 
-    private bool TryGetResources(Dictionary<ResourceType, int> resources)
+    public bool TryGetResources(Dictionary<ResourceType, int> resources)
     {
         bool isEnough = true;
         foreach (var resource in resources)
@@ -58,27 +82,5 @@ public class SectorManager : MonoBehaviour
     {
         foreach (var resource in resources)
             sectorResources[(int)resource.Key].Count += resource.Value;
-    }
-
-    public Resource GetResource(ResourceType resourceType) => sectorResources[(int)resourceType];
-
-    private void Start()
-    {
-        buildings = new List<IBuilding>();
-        sectorResources = new List<Resource>();
-        for (ResourceType type = 0; type < ResourceType.length; type++)
-            sectorResources.Add(new Resource(type));
-        sectorResources[(int)ResourceType.Coal].Count = 10; //Debug
-        StartCoroutine(SectorUpdate());
-    }
-
-    private IEnumerator SectorUpdate()
-    {
-        while (true)
-        {
-            for (int i = 0; i < buildings.Count; i++)
-                UpdateResources(buildings[i]);
-            yield return new WaitForSeconds(1.0f);
-        }
     }
 }

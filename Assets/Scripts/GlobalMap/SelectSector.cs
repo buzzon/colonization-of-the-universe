@@ -75,8 +75,8 @@ public class SelectSector : MonoBehaviour
 
     private void CloseSector()
     {
-        CurrentSector.Manager = null;
         Loader.UnLoad(Loader.Scene.Sector);
+        CurrentSector.Manager = null;
         MainCamera.gameObject.SetActive(true);
         isSectorOpen = false;
         StartCoroutine(SelectSectorUpdate());

@@ -16,5 +16,5 @@ public class Resource
 
 public enum ResourceType
 {
-    Energy, Coal, length
+    Energy, Coal, Wood, Iron, length
 }

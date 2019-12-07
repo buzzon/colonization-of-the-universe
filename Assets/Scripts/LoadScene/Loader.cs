@@ -16,8 +16,8 @@ public static class Loader
     [System.Obsolete]
     public static void UnLoad(Scene scene)
     {
-        if (SceneManager.sceneCount <= 1) return;
+        if (SceneManager.sceneCount <= 1) 
+            return;
         SceneManager.UnloadScene(scene.ToString());
     }
-
 }
