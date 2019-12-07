@@ -14,7 +14,7 @@ public class BuildingButton : MonoBehaviour
         buildingsParent = _buildingsParent;
 
         requiredResources = new Dictionary<ResourceType, int>();
-        foreach (RequiredResourcesDictionary resource in _buildingProfile.RequiredResources)
+        foreach (Resource resource in _buildingProfile.RequiredResources)
             requiredResources.Add(resource.Type, resource.Count);
     }
 

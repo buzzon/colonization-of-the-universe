@@ -18,7 +18,7 @@ public class ResourceInfo : MonoBehaviour
         {
             Resource resource = CurrentSector.Manager.GetResource(type);
             transform.Find("Count").GetComponent<Text>().text = resource.Count.ToString();
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 }

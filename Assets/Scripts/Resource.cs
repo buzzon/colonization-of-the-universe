@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
+[Serializable]
 public class Resource
 {
     public ResourceType Type;
-    public float Count;
+    public int Count;
 
     public Resource(ResourceType type)
     {
