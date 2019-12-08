@@ -32,7 +32,7 @@ public class MapControl : MonoBehaviour
 
     private void Update()
     {
-        float scale = -Input.GetAxis("Mouse ScrollWheel") * 8;
+        float scale = -Input.GetAxis("Mouse ScrollWheel") * 10;
         float newHeight = transform.position.y + scale * 2;
         if (scale != 0 && 
             (newHeight >= 60 || scale > 0) &&
@@ -41,7 +41,7 @@ public class MapControl : MonoBehaviour
             Vector3 rotation = transform.rotation.eulerAngles;
             rotation.x += scale;
             transform.rotation = Quaternion.Euler(rotation);
-            transform.position += new Vector3(0, scale * 2, 0);
+            transform.position += new Vector3(0, scale * 2, scale * Mathf.Sin(rotation.x * Mathf.PI / 180));
         }
 
         if (offset.magnitude > 0)
