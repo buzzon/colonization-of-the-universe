@@ -6,6 +6,7 @@ public class MapControl : MonoBehaviour
 {
     private Dictionary<string, Vector3> dir;
     private Vector3 offset;
+    private List<GameObject> sectors;
 
     public void PointerEnter(string direction) => offset += dir[direction];
     public void PointerExit(string direction) => offset -= dir[direction];
@@ -20,6 +21,8 @@ public class MapControl : MonoBehaviour
             { "Left", new Vector3(-1f, 0f, 0f) }
         };
         offset = new Vector3(0, 0, 0);
+
+        sectors = GetSectors();
     }
 
     private void Update()
@@ -37,7 +40,23 @@ public class MapControl : MonoBehaviour
         }
         if (offset.magnitude > 0)
         {
-            //Тут перемещаем сектора в зависимости от offset
+            foreach (GameObject sector in sectors)
+                sector.transform.position += offset.normalized * Time.deltaTime * 2;
         }
+    }
+
+    private List<GameObject> GetSectors()
+    {
+        List<GameObject> sectors = new List<GameObject>(transform.childCount);
+
+        for (int i = 0; i < transform.childCount; i++) 
+            sectors.Add(transform.GetChild(i).gameObject);
+
+        return sectors;
+    }
+
+    public void Set()
+    {
+
     }
 }
