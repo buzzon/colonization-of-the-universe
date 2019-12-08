@@ -647,6 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e08542f0b3ac5274c95f9cf4862ae17e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  World: {fileID: 1361669262}
 --- !u!1 &657629768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1169,7 +1170,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1361669263}
   - component: {fileID: 1361669265}
-  - component: {fileID: 1361669264}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -1191,22 +1191,6 @@ Transform:
   m_Father: {fileID: 1364977994}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1361669264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1361669262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f141ceaf8317aa45936a84f14937094, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SectorPrefab: {fileID: 4863684130120804377, guid: 4d9a164224ca9354795d65abbc4bc08d,
-    type: 3}
-  SectorsInLine: 8
-  Offset: 0.3
 --- !u!65 &1361669265
 BoxCollider:
   m_ObjectHideFlags: 0
