@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Map : MonoBehaviour
+public class Map
 {
     private List<GameObject> sectors;
     private BoxCollider collider;
@@ -21,7 +21,7 @@ public class Map : MonoBehaviour
             for (int i = 0; i < sectorsInLine; i++)
             {
                 Vector3 position = new Vector3(i * fullSectorSize.x + (fullSectorSize.x / 2) * (j % 2), 0, j * fullSectorSize.z * 3 / 4);
-                GameObject sector = Instantiate(sectorPrefab, position, Quaternion.identity, world.transform);
+                GameObject sector = UnityEngine.Object.Instantiate(sectorPrefab, position, Quaternion.identity, world.transform);
                 sector.GetComponent<SectorManager>().ID = k++;
                 sectors.Add(sector);
             }
