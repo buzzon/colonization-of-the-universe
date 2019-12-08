@@ -43,7 +43,8 @@ public class MapControl : MonoBehaviour
             transform.rotation = Quaternion.Euler(rotation);
             transform.position += new Vector3(0, scale * 2, 0);
         }
-        if (offset.magnitude > 0) 
+
+        if (offset.magnitude > 0)
             map.Move(offset);
     }
 }
