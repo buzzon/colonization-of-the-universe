@@ -4,26 +4,18 @@ using UnityEngine;
 
 public class BuildingButton : MonoBehaviour
 {
-    private GameObject prefab;
+    private BuildingProfile buildingProfile;
     private Transform buildingsParent;
-    private Dictionary<ResourceType, int> requiredResources;
 
     public void Set(BuildingProfile _buildingProfile, Transform _buildingsParent)
     {
-        prefab = _buildingProfile.Prefab;
+        buildingProfile = _buildingProfile;
         buildingsParent = _buildingsParent;
-
-        requiredResources = new Dictionary<ResourceType, int>();
-        foreach (Resource resource in _buildingProfile.RequiredResources)
-            requiredResources.Add(resource.Type, resource.Count);
     }
 
     public void OnClick()
     {
-        if (CurrentSector.Manager.TryGetResources(requiredResources))
-        {
-            GameObject building = Instantiate(prefab, buildingsParent);
-            buildingsParent.GetComponent<PlaceManager>().Set(building);
-        }
+        GameObject building = Instantiate(buildingProfile.Prefab, buildingsParent);
+        buildingsParent.GetComponent<PlaceManager>().Set(building, buildingProfile.InstallationResources);
     }
 }

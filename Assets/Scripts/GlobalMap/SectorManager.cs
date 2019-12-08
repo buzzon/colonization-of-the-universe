@@ -13,7 +13,7 @@ public class SectorManager : MonoBehaviour
         buildings = new List<IBuilding>();
         sectorResources = new List<Resource>();
         for (ResourceType type = 0; type < ResourceType.length; type++)
-            sectorResources.Add(new Resource(type));
+            sectorResources.Add(new Resource(type, 0));
         sectorResources[(int)ResourceType.Coal].Count = 10; //Debug
         sectorResources[(int)ResourceType.Wood].Count = 40; //Debug
         sectorResources[(int)ResourceType.Iron].Count = 40; //Debug
@@ -39,9 +39,9 @@ public class SectorManager : MonoBehaviour
 
     private void UpdateResources(IBuilding building)
     {
-        bool isWork = TryGetResources(building.ResourcesUses);
+        bool isWork = TryGetResources(building.RequiredResources);
         if (isWork)
-            AddResources(building.ResourcesProduces);
+            AddResources(building.ProducedResources);
 
         if (CurrentSector.Manager == this)
         {
@@ -59,12 +59,12 @@ public class SectorManager : MonoBehaviour
         }
     }
 
-    public bool TryGetResources(Dictionary<ResourceType, int> resources)
+    public bool TryGetResources(Resource[] resources)
     {
         bool isEnough = true;
         foreach (var resource in resources)
         {
-            if (sectorResources[(int)resource.Key].Count < resource.Value)
+            if (sectorResources[(int)resource.Type].Count < resource.Count)
             {
                 isEnough = false;
                 break;
@@ -73,14 +73,14 @@ public class SectorManager : MonoBehaviour
         if (isEnough)
         {
             foreach (var resource in resources)
-                sectorResources[(int)resource.Key].Count -= resource.Value;
+                sectorResources[(int)resource.Type].Count -= resource.Count;
         }
         return isEnough;
     }
 
-    private void AddResources(Dictionary<ResourceType, int> resources)
+    private void AddResources(Resource[] resources)
     {
         foreach (var resource in resources)
-            sectorResources[(int)resource.Key].Count += resource.Value;
+            sectorResources[(int)resource.Type].Count += resource.Count;
     }
 }

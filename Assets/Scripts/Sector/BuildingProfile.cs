@@ -9,5 +9,5 @@ public class BuildingProfile : ScriptableObject
     public GameObject Prefab;
     public Sprite Icon;
     public string Name;
-    public Resource[] RequiredResources;
+    public Resource[] InstallationResources;
 }

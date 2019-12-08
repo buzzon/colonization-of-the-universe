@@ -15,7 +15,7 @@ MonoBehaviour:
   Prefab: {fileID: 8886117497953823749, guid: 94a319b3065963d4c9f478eb6b0c3f24, type: 3}
   Icon: {fileID: 21300000, guid: 84bd27076d0f7144fa846f6b3d89fc72, type: 3}
   Name: Power Station
-  RequiredResources:
+  InstallationResources:
   - Type: 2
     Count: 10
   - Type: 3

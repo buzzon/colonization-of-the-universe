@@ -17,7 +17,7 @@ public class BuildingButtonManager : MonoBehaviour
             button.transform.Find("Name").GetComponent<Text>().text = building.Name;
             Text text = button.transform.Find("Required").GetComponent<Text>();
             text.text = "";
-            foreach (Resource resource in building.RequiredResources)
+            foreach (Resource resource in building.InstallationResources)
                 text.text += "\r\n" + resource.Type.ToString() + ": " + resource.Count;
             button.transform.GetComponent<Image>().sprite = building.Icon;
             BuildingButton buildingButton = button.GetComponent<BuildingButton>();

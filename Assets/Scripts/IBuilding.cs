@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IBuilding
 {
-    Dictionary<ResourceType, int> ResourcesUses { get; }
-    Dictionary<ResourceType, int> ResourcesProduces { get; }
+    Resource[] RequiredResources { get; }
+    Resource[] ProducedResources { get; }
     void Set();
 }

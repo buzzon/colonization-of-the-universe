@@ -3,18 +3,18 @@ using UnityEngine;
 
 public class Mine : MonoBehaviour, IBuilding
 {
-    public Dictionary<ResourceType, int> ResourcesUses { get; private set; }
-    public Dictionary<ResourceType, int> ResourcesProduces { get; private set; }
+    public Resource[] RequiredResources { get; private set; }
+    public Resource[] ProducedResources { get; private set; }
 
     public void Set()
     {
-        ResourcesUses = new Dictionary<ResourceType, int>()
+        RequiredResources = new Resource[]
         {
-            { ResourceType.Energy, 2 }
+            new Resource(ResourceType.Energy, 2)
         };
-        ResourcesProduces = new Dictionary<ResourceType, int>()
+        ProducedResources = new Resource[]
         {
-            { ResourceType.Coal, 3 }
+            new Resource(ResourceType.Coal, 3)
         };
         CurrentSector.Manager.AddBuilding(this);
     }

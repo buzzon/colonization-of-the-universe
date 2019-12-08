@@ -6,10 +6,10 @@ public class Resource
     public ResourceType Type;
     public int Count;
 
-    public Resource(ResourceType type)
+    public Resource(ResourceType type, int count)
     {
         Type = type;
-        Count = 0;
+        Count = count;
     }
 }
 

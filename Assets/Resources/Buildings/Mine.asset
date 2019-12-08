@@ -15,8 +15,8 @@ MonoBehaviour:
   Prefab: {fileID: 49786080936744977, guid: 8be2f969e00154d45b4fa2bf29aa6bf3, type: 3}
   Icon: {fileID: 21300000, guid: 550627416b0888f469359fd8776dea3b, type: 3}
   Name: Mine
-  RequiredResources:
+  InstallationResources:
   - Type: 2
-    Count: 10
+    Count: 20
   - Type: 3
     Count: 5
