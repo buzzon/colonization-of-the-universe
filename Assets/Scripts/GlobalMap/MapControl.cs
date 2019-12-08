@@ -5,9 +5,12 @@ using UnityEngine;
 public class MapControl : MonoBehaviour
 {
     public GameObject World;
+    public GameObject SectorPrefab;
+    public int SectorsInLine;
+    public float SectorsGap;
+
     private Dictionary<string, Vector3> dir;
     private Vector3 offset;
-    //private List<GameObject> sectors;
     private Map map;
 
     public void PointerEnter(string direction) => offset += dir[direction];
@@ -15,6 +18,8 @@ public class MapControl : MonoBehaviour
 
     private void Start()
     {
+        map = new Map(World, SectorPrefab, SectorsInLine, SectorsGap);
+
         dir = new Dictionary<string, Vector3>()
         {
             { "Up", new Vector3(0f, 0f, 1f) },
@@ -23,8 +28,6 @@ public class MapControl : MonoBehaviour
             { "Left", new Vector3(-1f, 0f, 0f) }
         };
         offset = new Vector3(0, 0, 0);
-
-        map = new Map();
     }
 
     private void Update()
@@ -40,25 +43,7 @@ public class MapControl : MonoBehaviour
             transform.rotation = Quaternion.Euler(rotation);
             transform.position += new Vector3(0, scale * 2, 0);
         }
-        if (offset.magnitude > 0)
-        {
-            //foreach (GameObject sector in sectors)
-            //    sector.transform.position += offset.normalized * Time.deltaTime * 2;
-        }
+        if (offset.magnitude > 0) 
+            map.Move(offset);
     }
-    
-    //private List<GameObject> GetSectors()
-    //{
-    //    List<GameObject> sectors = new List<GameObject>(transform.childCount);
-
-    //    for (int i = 0; i < transform.childCount; i++) 
-    //        sectors.Add(transform.GetChild(i).gameObject);
-
-    //    return sectors;
-    //}
-
-    //public void Set()
-    //{
-
-    //}
 }
