@@ -650,7 +650,7 @@ MonoBehaviour:
   World: {fileID: 1361669262}
   SectorPrefab: {fileID: 4863684130120804377, guid: 4d9a164224ca9354795d65abbc4bc08d,
     type: 3}
-  SectorsInLine: 8
+  SectorsInLine: 10
   SectorsGap: 0.2
 --- !u!1 &657629768
 GameObject:

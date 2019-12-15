@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18bf466791e8e764e8bd0a4490204013, type: 3}
-  m_Name: Mine
+  m_Name: Iron Works
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 49786080936744977, guid: 8be2f969e00154d45b4fa2bf29aa6bf3, type: 3}
-  Icon: {fileID: 21300000, guid: c3791288a4275734cab03a1e4c3ff491, type: 3}
-  Name: Mine
+  Prefab: {fileID: 8886117497953823749, guid: e236bdc8d7ddba84bac7b84cd9685628, type: 3}
+  Icon: {fileID: 21300000, guid: 7d58ad80697df304895ddaaa3ada96a2, type: 3}
+  Name: Iron Works
   InstallationResources:
-  - Type: 2
-    Count: 20
   - Type: 3
-    Count: 5
+    Count: 10

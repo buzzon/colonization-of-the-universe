@@ -14,9 +14,9 @@ public class SectorManager : MonoBehaviour
         sectorResources = new List<Resource>();
         for (ResourceType type = 0; type < ResourceType.length; type++)
             sectorResources.Add(new Resource(type, 0));
-        sectorResources[(int)ResourceType.Coal].Count = 10; //Debug
-        sectorResources[(int)ResourceType.Wood].Count = 40; //Debug
-        sectorResources[(int)ResourceType.Iron].Count = 40; //Debug
+        sectorResources[(int)ResourceType.Coal].Count = 100; //Debug
+        sectorResources[(int)ResourceType.Wood].Count = 400; //Debug
+        sectorResources[(int)ResourceType.Iron].Count = 400; //Debug
         StartCoroutine(SectorUpdate());
     }
 
