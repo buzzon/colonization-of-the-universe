@@ -32,11 +32,11 @@ public class Map
         world.transform.position = -1 * collider.center ;
     }
 
-    public void Move(Vector3 offset)
+    public void Move(Vector3 offset, float deltaTime, float height)
     {
         foreach (GameObject sector in sectors)
         {
-            sector.transform.position -= offset; 
+            sector.transform.position -= offset * deltaTime * height * 0.6f; 
             Vector3 pos = sector.transform.position;
 
             if (pos.z < collider.bounds.min.z)

@@ -28,15 +28,15 @@ public class CameraControl : MonoBehaviour
     private void Update()
     {
         float scale = -Input.GetAxis("Mouse ScrollWheel") * 10;
-        float newHeight = height + scale * 2;
+        float newHeight = height + scale * 4;
         if (scale != 0 && 
-            (newHeight >= 30 || scale > 0) &&
-            (newHeight <= 120 || scale < 0))
+            (newHeight >= 50 || scale > 0) &&
+            (newHeight <= 180 || scale < 0))
         {
             Vector3 rotation = transform.rotation.eulerAngles;
             rotation.x += scale;
             transform.rotation = Quaternion.Euler(rotation);
-            transform.position += new Vector3(0, scale * 2, scale * Mathf.Sin(rotation.x * Mathf.PI / 180));
+            transform.position += new Vector3(0, scale * 4, scale * Mathf.Sin(rotation.x * Mathf.PI / 180));
             height = newHeight;
         }
         if (offset.magnitude > 0)

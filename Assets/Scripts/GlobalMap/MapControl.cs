@@ -41,10 +41,10 @@ public class MapControl : MonoBehaviour
             Vector3 rotation = transform.rotation.eulerAngles;
             rotation.x += scale;
             transform.rotation = Quaternion.Euler(rotation);
-            transform.position += new Vector3(0, scale * 2, scale * Mathf.Sin(rotation.x * Mathf.PI / 180));
+            transform.position += new Vector3(0, scale * 2, scale * Mathf.Sin(rotation.x * Mathf.PI / 180) * 1.2f);
         }
 
         if (offset.magnitude > 0)
-            map.Move(offset);
+            map.Move(offset.normalized, Time.deltaTime, transform.position.y);
     }
 }
