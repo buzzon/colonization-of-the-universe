@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class IronWorks : MonoBehaviour, IBuilding
+public class IronWorks : Building
 {
-    public Resource[] RequiredResources { get; private set; }
-    public Resource[] ProducedResources { get; private set; }
-
-    public void Set()
+    public override void Set()
     {
         RequiredResources = new Resource[]
         {

@@ -69,13 +69,14 @@ public class SelectSector : MonoBehaviour
         SetColor(sector, Color.white);
         MainCamera.gameObject.SetActive(false);
         CurrentSector.Manager = sector.GetComponent<SectorManager>();
-        Loader.Load(Loader.Scene.Sector);
+        CurrentSector.Manager.Load();
+        Loader.Load(Loader.SceneType.Sector);
         isSectorOpen = true;
     }
 
     private void CloseSector()
     {
-        Loader.UnLoad(Loader.Scene.Sector);
+        Loader.UnLoad(Loader.SceneType.Sector);
         CurrentSector.Manager = null;
         MainCamera.gameObject.SetActive(true);
         isSectorOpen = false;

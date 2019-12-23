@@ -27,7 +27,7 @@ public class BuildingManager : MonoBehaviour
         {
             if (value)
             {
-                IBuilding building = transform.GetComponent<IBuilding>();
+                Building building = transform.GetComponent<Building>();
                 building.Set();
                 IsWork = true;
             }

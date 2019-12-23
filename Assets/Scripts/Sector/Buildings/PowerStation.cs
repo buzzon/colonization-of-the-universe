@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerStation : MonoBehaviour, IBuilding
+public class PowerStation : Building
 {
-    public Resource[] RequiredResources { get; private set; }
-    public Resource[] ProducedResources { get; private set; }
-
-    public void Set()
+    public override void Set()
     {
         RequiredResources = new Resource[]
         {

@@ -3,22 +3,22 @@ using UnityEngine;
 
 public static class Loader
 {
-    public enum Scene
+    public enum SceneType
     {
-        GlobalScene,
+        GlobalMap,
         Sector
     }
 
-    public static void Load(Scene scene)
+    public static void Load(SceneType sceneType)
     {
-        SceneManager.LoadScene(scene.ToString(), LoadSceneMode.Additive);
+        SceneManager.LoadScene(sceneType.ToString(), LoadSceneMode.Additive);
     }
 
     [System.Obsolete]
-    public static void UnLoad(Scene scene)
+    public static void UnLoad(SceneType sceneType)
     {
-        if (SceneManager.sceneCount <= 1) 
+        if (SceneManager.sceneCount <= 1)
             return;
-        SceneManager.UnloadScene(scene.ToString());
+        SceneManager.UnloadScene(sceneType.ToString());
     }
 }

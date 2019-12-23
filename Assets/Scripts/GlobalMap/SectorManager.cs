@@ -5,12 +5,12 @@ using UnityEngine;
 public class SectorManager : MonoBehaviour
 {
     public int ID;
-    private List<IBuilding> buildings;
+    private List<Building> buildings;
     private List<Resource> sectorResources;
 
-    private void Start()
+    private void Init()
     {
-        buildings = new List<IBuilding>();
+        buildings = new List<Building>();
         sectorResources = new List<Resource>();
         for (ResourceType type = 0; type < ResourceType.length; type++)
             sectorResources.Add(new Resource(type, 0));
@@ -30,14 +30,23 @@ public class SectorManager : MonoBehaviour
         }
     }
 
-    public void AddBuilding(IBuilding building)
+    public void Load()
+    {
+        if (buildings is null)
+        {
+            Init();
+            return;
+        }
+    }
+
+    public void AddBuilding(Building building)
     {
         buildings.Add(building);
     }
 
     public Resource GetResource(ResourceType resourceType) => sectorResources[(int)resourceType];
 
-    private void UpdateResources(IBuilding building)
+    private void UpdateResources(Building building)
     {
         bool isWork = TryGetResources(building.RequiredResources);
         if (isWork)
