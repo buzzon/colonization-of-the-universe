@@ -12,8 +12,3 @@ public class Resource
         Count = count;
     }
 }
-
-public enum ResourceType
-{
-    Energy, Coal, Wood, Iron, length
-}

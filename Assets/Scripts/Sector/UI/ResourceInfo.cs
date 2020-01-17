@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ResourceInfo : MonoBehaviour
 {
     private ResourceType type;
+
     public void Set(ResourceType _type)
     {
         type = _type;
@@ -16,7 +17,7 @@ public class ResourceInfo : MonoBehaviour
     {
         while (true)
         {
-            Resource resource = CurrentSector.Manager.GetResource(type);
+            Resource resource = GlobalData.CurrentSectorManager.GetResource(type);
             transform.Find("Count").GetComponent<Text>().text = resource.Count.ToString();
             yield return new WaitForSeconds(0.2f);
         }

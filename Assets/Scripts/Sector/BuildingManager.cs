@@ -17,21 +17,18 @@ public class BuildingManager : MonoBehaviour
             isWork = value;
         }
     }
+
     public bool IsCollision { get; private set; }
 
-    private bool isBuilt;
-    public bool IsBuilt
+    public bool IsBuilt { get; private set; }
+
+    public void SetAsBuilt(BuildingProfile buildingProfile)
     {
-        get => isBuilt;
-        set 
+        if (!IsBuilt)
         {
-            if (value)
-            {
-                Building building = transform.GetComponent<Building>();
-                building.Set();
-                IsWork = true;
-            }
-            isBuilt = value;
+            GlobalData.CurrentSectorManager.AddBuilding(buildingProfile.Type);
+            IsBuilt = true;
+            IsWork = true;
         }
     }
 

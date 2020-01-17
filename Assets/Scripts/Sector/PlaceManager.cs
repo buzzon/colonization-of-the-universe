@@ -9,14 +9,15 @@ public class PlaceManager : MonoBehaviour
     public Text InfoText;
     private BuildingManager buildingManager;
     private GameObject building;
-    private Resource[] installationResources;
+    private BuildingProfile buildingProfile;
 
-    public void Set(GameObject _building, Resource[] _installationResources)
+    public void Set(BuildingProfile _buildingProfile)
     {
-        installationResources = _installationResources;
-        building = _building;
+        buildingProfile = _buildingProfile;
+        building = Instantiate(buildingProfile.Prefab, transform);
         buildingManager = building.GetComponent<BuildingManager>();
         StartCoroutine(BuildingPositionUpdate());
+        GlobalData.IsPlaceManagerActive = true;
     }
 
     private IEnumerator BuildingPositionUpdate()
@@ -37,8 +38,8 @@ public class PlaceManager : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0) && !buildingManager.IsCollision)
             {
-                if (CurrentSector.Manager.TryGetResources(installationResources))
-                    buildingManager.IsBuilt = true;
+                if (GlobalData.CurrentSectorManager.TryGetResources(buildingProfile.InstallationResources))
+                    buildingManager.SetAsBuilt(buildingProfile);
                 else
                 {
                     InfoText.text = "Not enough resources";
@@ -53,5 +54,6 @@ public class PlaceManager : MonoBehaviour
             }
             yield return null;
         }
+        GlobalData.IsPlaceManagerActive = false;
     }
 }

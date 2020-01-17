@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +11,9 @@ public class BuildingButtonManager : MonoBehaviour
 
     void Start()
     {
-        BuildingProfile[] buildings = Resources.LoadAll<BuildingProfile>("Buildings");
-        foreach(BuildingProfile building in buildings)
+        GlobalData.BuildingProfiles = Resources.LoadAll<BuildingProfile>("Buildings");
+        Array.Sort(GlobalData.BuildingProfiles, new BuildingProfileComparer());
+        foreach(BuildingProfile building in GlobalData.BuildingProfiles)
         {
             GameObject button = Instantiate(BuildingButtonPrefab, transform);
             button.transform.Find("Name").GetComponent<Text>().text = building.Name;

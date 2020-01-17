@@ -5,12 +5,12 @@ using UnityEngine;
 public class SectorManager : MonoBehaviour
 {
     public int ID;
-    private List<Building> buildings;
+    private List<BuildingType> buildings;
     private List<Resource> sectorResources;
 
     private void Init()
     {
-        buildings = new List<Building>();
+        buildings = new List<BuildingType>();
         sectorResources = new List<Resource>();
         for (ResourceType type = 0; type < ResourceType.length; type++)
             sectorResources.Add(new Resource(type, 0));
@@ -25,7 +25,7 @@ public class SectorManager : MonoBehaviour
         while (true)
         {
             for (int i = 0; i < buildings.Count; i++)
-                UpdateResources(buildings[i]);
+                UpdateResources(GlobalData.BuildingProfiles[(int)buildings[i]]);
             yield return new WaitForSeconds(1.0f);
         }
     }
@@ -33,39 +33,36 @@ public class SectorManager : MonoBehaviour
     public void Load()
     {
         if (buildings is null)
-        {
             Init();
-            return;
-        }
     }
 
-    public void AddBuilding(Building building)
+    public void AddBuilding(BuildingType building)
     {
         buildings.Add(building);
     }
 
     public Resource GetResource(ResourceType resourceType) => sectorResources[(int)resourceType];
 
-    private void UpdateResources(Building building)
+    private void UpdateResources(BuildingProfile building)
     {
         bool isWork = TryGetResources(building.RequiredResources);
         if (isWork)
             AddResources(building.ProducedResources);
 
-        if (CurrentSector.Manager == this)
-        {
-            MonoBehaviour buildingEntity = building as MonoBehaviour;
-            if (buildingEntity != null)
-            {
-                if (buildingEntity.TryGetComponent(out BuildingManager buildingManager))
-                {
-                    if (isWork && !buildingManager.IsWork)
-                        buildingManager.IsWork = true;
-                    else if (!isWork && buildingManager.IsWork)
-                        buildingManager.IsWork = false;
-                }
-            }
-        }
+        //if (GlobalData.CurrentSectorManager == this)
+        //{
+        //    MonoBehaviour buildingEntity = building as MonoBehaviour;
+        //    if (buildingEntity != null)
+        //    {
+        //        if (buildingEntity.TryGetComponent(out BuildingManager buildingManager))
+        //        {
+        //            if (isWork && !buildingManager.IsWork)
+        //                buildingManager.IsWork = true;
+        //            else if (!isWork && buildingManager.IsWork)
+        //                buildingManager.IsWork = false;
+        //        }
+        //    }
+        //}
     }
 
     public bool TryGetResources(Resource[] resources)

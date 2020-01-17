@@ -15,7 +15,7 @@ public class BuildingButton : MonoBehaviour
 
     public void OnClick()
     {
-        GameObject building = Instantiate(buildingProfile.Prefab, buildingsParent);
-        buildingsParent.GetComponent<PlaceManager>().Set(building, buildingProfile.InstallationResources);
+        if (!GlobalData.IsPlaceManagerActive)
+            buildingsParent.GetComponent<PlaceManager>().Set(buildingProfile);
     }
 }
