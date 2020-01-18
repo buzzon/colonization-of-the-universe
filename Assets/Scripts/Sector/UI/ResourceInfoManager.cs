@@ -9,8 +9,7 @@ public class ResourceInfoManager : MonoBehaviour
 
     void Start()
     {
-        ResourceProfile[] resources = Resources.LoadAll<ResourceProfile>("Resources");
-        foreach (ResourceProfile resource in resources)
+        foreach (ResourceProfile resource in GlobalData.ResourceProfiles)
         {
             GameObject info = Instantiate(ResourceInfoPrefab, transform);
             info.transform.Find("Count").GetComponent<Text>().text = "0";

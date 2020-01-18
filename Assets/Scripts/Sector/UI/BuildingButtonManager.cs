@@ -11,8 +11,6 @@ public class BuildingButtonManager : MonoBehaviour
 
     void Start()
     {
-        GlobalData.BuildingProfiles = Resources.LoadAll<BuildingProfile>("Buildings");
-        Array.Sort(GlobalData.BuildingProfiles, new BuildingProfileComparer());
         foreach(BuildingProfile building in GlobalData.BuildingProfiles)
         {
             GameObject button = Instantiate(BuildingButtonPrefab, transform);

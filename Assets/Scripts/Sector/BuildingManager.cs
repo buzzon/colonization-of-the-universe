@@ -20,13 +20,13 @@ public class BuildingManager : MonoBehaviour
 
     public bool IsCollision { get; private set; }
 
-    public bool IsBuilt { get; private set; }
+    public bool IsBuilt { get; set; }
 
     public void SetAsBuilt(BuildingProfile buildingProfile)
     {
         if (!IsBuilt)
         {
-            GlobalData.CurrentSectorManager.AddBuilding(buildingProfile.Type);
+            GlobalData.CurrentSectorManager.AddBuilding(buildingProfile, gameObject);
             IsBuilt = true;
             IsWork = true;
         }

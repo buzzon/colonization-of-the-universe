@@ -70,7 +70,6 @@ public class SelectSector : MonoBehaviour
         SetColor(sector, Color.white);
         MainCamera.gameObject.SetActive(false);
         GlobalData.CurrentSectorManager = sector.GetComponent<SectorManager>();
-        GlobalData.CurrentSectorManager.Load();
         Loader.Load(Loader.SceneType.Sector);
     }
 

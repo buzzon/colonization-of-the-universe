@@ -5,12 +5,14 @@ using UnityEngine;
 public class SectorManager : MonoBehaviour
 {
     public int ID;
-    private List<BuildingType> buildings;
+    private List<Building> buildings;
     private List<Resource> sectorResources;
+    private List<GameObject> buildingObjects;
 
     private void Init()
     {
-        buildings = new List<BuildingType>();
+        buildings = new List<Building>();
+        buildingObjects = new List<GameObject>();
         sectorResources = new List<Resource>();
         for (ResourceType type = 0; type < ResourceType.length; type++)
             sectorResources.Add(new Resource(type, 0));
@@ -25,20 +27,33 @@ public class SectorManager : MonoBehaviour
         while (true)
         {
             for (int i = 0; i < buildings.Count; i++)
-                UpdateResources(GlobalData.BuildingProfiles[(int)buildings[i]]);
+                UpdateResources(GlobalData.BuildingProfiles[(int)buildings[i].Type]);
             yield return new WaitForSeconds(1.0f);
         }
     }
 
-    public void Load()
+    public void Load(Transform buildingsParent)
     {
         if (buildings is null)
             Init();
+        else
+        {
+            buildingObjects = new List<GameObject>();
+            for (int i = 0; i < buildings.Count; i++)
+            {
+                GameObject prefab = GlobalData.BuildingProfiles[(int)buildings[i].Type].Prefab;
+                GameObject buildingObject = Instantiate(prefab, buildings[i].Position, buildings[i].Rotation, buildingsParent);
+                buildingObject.GetComponent<BuildingManager>().IsBuilt = true;
+                buildingObject.GetComponent<BuildingManager>().IsWork = true;
+                buildingObjects.Add(buildingObject);
+            }
+        }
     }
 
-    public void AddBuilding(BuildingType building)
+    public void AddBuilding(BuildingProfile buildingProfile, GameObject buildingObject)
     {
-        buildings.Add(building);
+        buildings.Add(new Building(buildingProfile.Type, buildingObject.transform.position, buildingObject.transform.rotation));
+        buildingObjects.Add(buildingObject);
     }
 
     public Resource GetResource(ResourceType resourceType) => sectorResources[(int)resourceType];

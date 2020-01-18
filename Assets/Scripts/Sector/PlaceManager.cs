@@ -11,6 +11,11 @@ public class PlaceManager : MonoBehaviour
     private GameObject building;
     private BuildingProfile buildingProfile;
 
+    public void Awake()
+    {
+        GlobalData.CurrentSectorManager.Load(transform);
+    }
+
     public void Set(BuildingProfile _buildingProfile)
     {
         buildingProfile = _buildingProfile;
