@@ -8,6 +8,7 @@ public class SectorManager : MonoBehaviour
     private List<Building> buildings;
     private List<Resource> sectorResources;
     private List<GameObject> buildingObjects;
+    private bool isLoad;
 
     private void Init()
     {
@@ -31,12 +32,14 @@ public class SectorManager : MonoBehaviour
                 bool isWork = UpdateResources(GlobalData.BuildingProfiles[(int)buildings[i].Type]);
                 if (isWork && !buildings[i].IsWork)
                 {
-                    buildingObjects[i].GetComponent<BuildingManager>().IsWork = true;
+                    if (isLoad)
+                        buildingObjects[i].GetComponent<BuildingManager>().IsWork = true;
                     buildings[i].IsWork = true;
                 }
                 else if (!isWork && buildings[i].IsWork)
                 {
-                    buildingObjects[i].GetComponent<BuildingManager>().IsWork = false;
+                    if (isLoad)
+                        buildingObjects[i].GetComponent<BuildingManager>().IsWork = false;
                     buildings[i].IsWork = false;
                 }
             }
@@ -46,6 +49,7 @@ public class SectorManager : MonoBehaviour
 
     public void Load(Transform buildingsParent)
     {
+        isLoad = true;
         if (buildings is null)
             Init();
         else
@@ -60,6 +64,11 @@ public class SectorManager : MonoBehaviour
                 buildingObjects.Add(buildingObject);
             }
         }
+    }
+
+    public void UnLoad()
+    {
+        isLoad = false;
     }
 
     public void AddBuilding(BuildingProfile buildingProfile, GameObject buildingObject)

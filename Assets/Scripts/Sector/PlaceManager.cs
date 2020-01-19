@@ -16,6 +16,11 @@ public class PlaceManager : MonoBehaviour
         GlobalData.CurrentSectorManager.Load(transform);
     }
 
+    public void OnDestroy()
+    {
+        GlobalData.CurrentSectorManager.UnLoad();
+    }
+
     public void Set(BuildingProfile _buildingProfile)
     {
         buildingProfile = _buildingProfile;

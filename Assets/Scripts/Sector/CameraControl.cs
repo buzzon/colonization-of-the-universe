@@ -31,12 +31,12 @@ public class CameraControl : MonoBehaviour
         float newHeight = height + scale * 4;
         if (scale != 0 && 
             (newHeight >= 50 || scale > 0) &&
-            (newHeight <= 180 || scale < 0))
+            (newHeight <= 210 || scale < 0))
         {
             Vector3 rotation = transform.rotation.eulerAngles;
             rotation.x += scale;
             transform.rotation = Quaternion.Euler(rotation);
-            transform.position += new Vector3(0, scale * 4, scale * Mathf.Sin(rotation.x * Mathf.PI / 180));
+            transform.position += new Vector3(0, scale * 4, scale * Mathf.Sin(rotation.x * Mathf.PI / 180) * 1.2f);
             height = newHeight;
         }
         if (offset.magnitude > 0)
