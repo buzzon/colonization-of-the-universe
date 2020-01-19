@@ -27,7 +27,19 @@ public class SectorManager : MonoBehaviour
         while (true)
         {
             for (int i = 0; i < buildings.Count; i++)
-                UpdateResources(GlobalData.BuildingProfiles[(int)buildings[i].Type]);
+            {
+                bool isWork = UpdateResources(GlobalData.BuildingProfiles[(int)buildings[i].Type]);
+                if (isWork && !buildings[i].IsWork)
+                {
+                    buildingObjects[i].GetComponent<BuildingManager>().IsWork = true;
+                    buildings[i].IsWork = true;
+                }
+                else if (!isWork && buildings[i].IsWork)
+                {
+                    buildingObjects[i].GetComponent<BuildingManager>().IsWork = false;
+                    buildings[i].IsWork = false;
+                }
+            }
             yield return new WaitForSeconds(1.0f);
         }
     }
@@ -44,7 +56,7 @@ public class SectorManager : MonoBehaviour
                 GameObject prefab = GlobalData.BuildingProfiles[(int)buildings[i].Type].Prefab;
                 GameObject buildingObject = Instantiate(prefab, buildings[i].Position, buildings[i].Rotation, buildingsParent);
                 buildingObject.GetComponent<BuildingManager>().IsBuilt = true;
-                buildingObject.GetComponent<BuildingManager>().IsWork = true;
+                buildingObject.GetComponent<BuildingManager>().IsWork = buildings[i].IsWork;
                 buildingObjects.Add(buildingObject);
             }
         }
@@ -52,32 +64,18 @@ public class SectorManager : MonoBehaviour
 
     public void AddBuilding(BuildingProfile buildingProfile, GameObject buildingObject)
     {
-        buildings.Add(new Building(buildingProfile.Type, buildingObject.transform.position, buildingObject.transform.rotation));
+        buildings.Add(new Building(buildingProfile.Type, buildingObject.transform.position, buildingObject.transform.rotation, true));
         buildingObjects.Add(buildingObject);
     }
 
     public Resource GetResource(ResourceType resourceType) => sectorResources[(int)resourceType];
 
-    private void UpdateResources(BuildingProfile building)
+    private bool UpdateResources(BuildingProfile building)
     {
         bool isWork = TryGetResources(building.RequiredResources);
         if (isWork)
             AddResources(building.ProducedResources);
-
-        //if (GlobalData.CurrentSectorManager == this)
-        //{
-        //    MonoBehaviour buildingEntity = building as MonoBehaviour;
-        //    if (buildingEntity != null)
-        //    {
-        //        if (buildingEntity.TryGetComponent(out BuildingManager buildingManager))
-        //        {
-        //            if (isWork && !buildingManager.IsWork)
-        //                buildingManager.IsWork = true;
-        //            else if (!isWork && buildingManager.IsWork)
-        //                buildingManager.IsWork = false;
-        //        }
-        //    }
-        //}
+        return isWork;
     }
 
     public bool TryGetResources(Resource[] resources)
