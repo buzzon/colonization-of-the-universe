@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18bf466791e8e764e8bd0a4490204013, type: 3}
   m_Name: IronFactory
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 2264600890640718688, guid: a9ad4c025cd183642a163e1e459eba41, type: 3}
+  Prefab: {fileID: 8886117497953823749, guid: e236bdc8d7ddba84bac7b84cd9685628, type: 3}
   Icon: {fileID: 21300000, guid: 7d58ad80697df304895ddaaa3ada96a2, type: 3}
   Type: 2
   Name: Iron Factory
